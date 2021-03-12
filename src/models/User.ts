@@ -9,6 +9,9 @@ export default class User {
   @Column() 
   name: string;
 
+  @Column() 
+  email: string;
+
   @Column('time with time zone')
   password: string
 
