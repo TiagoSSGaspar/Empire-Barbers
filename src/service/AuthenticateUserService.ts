@@ -1,4 +1,5 @@
 import {compare} from 'bcryptjs'
+import {sign} from 'jsonwebtoken';
 
 import User from '../models/User'
 
@@ -10,7 +11,8 @@ interface Request {
 }
 
 interface Response {
-  user: User
+  user: User,
+  token: string
 }
 
 export default class AuthenticateUserService {
@@ -33,8 +35,14 @@ export default class AuthenticateUserService {
       throw new Error('Incorrect email/password combination')
     }
 
+    const token = sign({}, '85353ea2e260c22c345314f98af33f96', {
+      subject: user.id,
+      expiresIn: '1d'
+    });
+
     return {
-      user
+      user,
+      token
     }
 
   }
