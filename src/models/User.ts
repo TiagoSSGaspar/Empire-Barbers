@@ -11,7 +11,10 @@ export default class User {
 
   @Column() 
   email: string;
-
+  
+  @Column() 
+  avatar: string;
+  
   @Column('time with time zone')
   password: string
 

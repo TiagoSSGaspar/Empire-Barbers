@@ -6,9 +6,12 @@ import uploadConfig from '../config/upload';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 import CreateUserService from '../service/CreateUserService';
+import UpdateUserAvatarService from '../service/UpdateUserAvatarService';
+
 
 const usersRouter = Router();
 const upload = multer(uploadConfig);
+
 
 usersRouter.post('/', async (request, response) => {
     try { 
@@ -26,7 +29,7 @@ usersRouter.post('/', async (request, response) => {
         //@ts-expect-error
         delete user.password;
 
-        return response.json(user)
+        return response.json(user);
 
     } catch (e) {
       return response.status(400).json({error: e.message})
@@ -35,7 +38,22 @@ usersRouter.post('/', async (request, response) => {
 });
 
 usersRouter.patch('/avatar', ensureAuthenticated, upload.single('avatar'), async (request, response) => {
-  return response.json({msg:'ok'});
+  try {
+    const updateUserAvatar = new UpdateUserAvatarService();
+
+   const user = await updateUserAvatar.execute({
+      user_id: request.user.id,
+      avatarFileName: request.file.filename
+    });
+
+    //@ts-expect-error
+    delete user.password;
+
+    return response.json(user);
+
+  } catch (e) {
+    return response.status(400).json({error: e.message})
+  }
 });
 
 export default usersRouter;
