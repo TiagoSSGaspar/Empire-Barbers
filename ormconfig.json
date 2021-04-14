@@ -6,12 +6,12 @@
     "password": "docker",
     "database": "empire_barbers",
     "entities": [
-      "./src/models/*.ts"
+      "./src/modules/**/infra/typeorm/entities/*.ts"
     ],
     "migrations": [
-		"./src/database/migrations/*.ts"
+		"./src/shred/infra/typeorm/migrations/*.ts"
 	],
 	"cli": {
-		"migrationsDir": "./src/database/migrations"
-	}
+		"migrationsDir": "./src/shred/infra/typeorm/migrations"
+	  }
   }
