@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 
 import IUserRepository from "../repositories/IUserRepository";
 
-import IStrorageProvider from "@shared/container/providers/StroragerProvider/models/IStrorageProvider";
+import IStrorageProvider from "@shared/container/providers/StoragerProvider/models/IStorageProvider";
 
 import { inject, injectable } from "tsyringe";
 

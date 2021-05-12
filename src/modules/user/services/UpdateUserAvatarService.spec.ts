@@ -1,4 +1,4 @@
-import FakeStrorageProvider from '@shared/container/providers/StroragerProvider/fakes/FakeStorageProvider';
+import FakeStrorageProvider from '@shared/container/providers/StoragerProvider/fakes/FakeStorageProvider';
 import AppError from '@shared/errors/AppError';
 
 import FakeUserRepository from '../repositories/fakes/FakeUserRepository';
@@ -34,7 +34,7 @@ describe('UpdateUserAvatar', () => {
         
         const updateUserAvatar = new UpdateUserAvatarService(fakeUserRepository, fakeStrorageProvider);
 
-        expect(updateUserAvatar.execute({
+        await expect(updateUserAvatar.execute({
             user_id: 'no-existir-user',
             avatarFileName: 'avatar.svg'
         })
